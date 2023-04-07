@@ -293,7 +293,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 841517850}
         m_TargetAssemblyTypeName: LevelSelect, Assembly-CSharp
-        m_MethodName: ExitScene_1
+        m_MethodName: ExitScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
