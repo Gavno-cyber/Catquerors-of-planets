@@ -5,6 +5,7 @@ public class LevelSelect : MonoBehaviour
 {
     public int level = 1;
     public GameObject[] closedLevel;
+	public GameObject[] noCompleteLevel;
 
     void Start()
     {
@@ -12,19 +13,24 @@ public class LevelSelect : MonoBehaviour
 		for (int i = 0; i < level; i++)
 		{
 			closedLevel[i].SetActive(false);
+			noCompleteLevel[i].SetActive(false);
+			if (level - i == 1)
+            {
+				noCompleteLevel[i].SetActive(true);
+            }
 		}
     }
 
-	public void OpenScene(string SceneName)
+	public void LoadTo(int level)
     {
-		SceneManager.LoadScene(SceneName);
+		SceneManager.LoadScene(level);
     }
 
-	public void ExitScene()
+	public void ExitScene(int x)
     {
-		if (level < level++)
+		if (level < x)
 		{
-			level = level++;
+			level = x;
 			PlayerPrefs.SetInt("level", level);
 		}
 		SceneManager.LoadScene("Menu");
