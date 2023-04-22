@@ -73,12 +73,20 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 21300000, guid: 6aea215f6e1dcd34eb9e46fb51fa78ad, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: c80d76986c8f19d46ab809d31cf250df, type: 3}
+>>>>>>> Stashed changes
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
+<<<<<<< Updated upstream
   m_Size: {x: 1.2, y: 1.25}
+=======
+  m_Size: {x: 6.17, y: 6.34}
+>>>>>>> Stashed changes
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -109,7 +117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 808641843673144799, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: radius
+<<<<<<< Updated upstream
       value: 0.7
+=======
+      value: 0
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 1130071361525978048, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_RootOrder
@@ -118,7 +130,11 @@ PrefabInstance:
     - target: {fileID: 2275268620926950600, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_Sprite
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 21300000, guid: cdad1fbc17f1dc7458a2e8cf45ed19a8, type: 3}
+=======
+      objectReference: {fileID: 21300000, guid: da3d50d424016f7418b5007a915362a5, type: 3}
+>>>>>>> Stashed changes
     - target: {fileID: 2556095197534260464, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -247,6 +263,13 @@ PrefabInstance:
       propertyPath: objectToSpawn
       value: 
       objectReference: {fileID: 1186193319345000697, guid: fe2ff6f767c14ea41a97d54a0e5b0d3c, type: 3}
+<<<<<<< Updated upstream
+=======
+    - target: {fileID: 6344997517919740126, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
+      propertyPath: radius
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes
     - target: {fileID: 6804769879512369608, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -275,8 +298,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678230b87af7c1d4aabe4bfd0b4d35d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   max_count: 10
   _healthpoints: 20
+=======
+  team: 
+  _healthpoints: 20
+  max_healthpoints: 20
+  max_count: 10
+>>>>>>> Stashed changes
   max_range: 6
 --- !u!4 &2199246762330131787 stripped
 Transform:

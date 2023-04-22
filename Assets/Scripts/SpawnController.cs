@@ -32,23 +32,42 @@ public class SpawnController : MonoBehaviour
 
     void Update()
     {
+<<<<<<< Updated upstream
         current_count = Globals.PLANETS[my_gameobject].Count;
         if (my_gameobject.GetComponent<CaptureController>()._isCaptured && current_count < max_count)
+=======
+        current_count = Globals.PLANETS[this.gameObject].Count;
+        if (my_gameobject.GetComponent<CaptureController>()._canspawn && current_count < max_count)
+>>>>>>> Stashed changes
         {
             timer += Time.deltaTime;
             if (timer >= interval)
             {
+<<<<<<< Updated upstream
                 _Spawn_Planet();
+=======
+                _SpawnUnit();
+>>>>>>> Stashed changes
                 timer -= interval;
             }
         } 
     }
 
+<<<<<<< Updated upstream
     void _Spawn_Planet()
     {
         objectToSpawn.GetComponent<PlanetGravity>().planet = my_gameobject;
         objectToSpawn = Instantiate(objectToSpawn, _spawnPosition, Quaternion.identity);
         Globals.PLANETS[my_gameobject].Add(objectToSpawn);
         objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();
+=======
+    void _SpawnUnit()
+    {
+        objectToSpawn.GetComponent<PlanetGravity>().planet = this.gameObject;
+        GameObject _objectToSpawn = Instantiate(objectToSpawn, _spawnPosition, Quaternion.identity);
+        Globals.PLANETS[my_gameobject].Add(_objectToSpawn);
+        _objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();
+        _objectToSpawn.GetComponent<Unit>().team = this.GetComponent<Unit>().team;
+>>>>>>> Stashed changes
     }
 }

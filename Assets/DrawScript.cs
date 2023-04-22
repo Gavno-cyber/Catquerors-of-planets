@@ -15,7 +15,11 @@ public class DrawScript : MonoBehaviour
 
     private void Update()
     {
+<<<<<<< Updated upstream
         DrawPolygon(180, radius, this.gameObject.transform.position, 0.03f, 0.03f);
+=======
+        DrawPolygon(180, radius, this.gameObject.transform.position, 0.07f, 0.07f);
+>>>>>>> Stashed changes
     }
 
     void DrawPolygon(int vertexNumber, float radius, Vector3 centerPos, float startWidth, float endWidth)

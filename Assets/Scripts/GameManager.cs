@@ -13,4 +13,8 @@ public class GameManager : MonoBehaviour
             Globals.PLANETS.Add(planet, new List<GameObject>());
         }
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }

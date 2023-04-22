@@ -9,6 +9,10 @@ public class PlanetManager : UnitManager
     void Start()
     {
         selectionRange.GetComponent<DrawScript>().radius = this.gameObject.GetComponent<Planet>().MaxRange;
+<<<<<<< Updated upstream
+=======
+        selectionCircle.GetComponent<DrawScript>().radius = (this.gameObject.GetComponent<CircleCollider2D>().radius * this.gameObject.transform.localScale.x) + 0.1f;
+>>>>>>> Stashed changes
     }
 
     public override void ActivateCircle()
