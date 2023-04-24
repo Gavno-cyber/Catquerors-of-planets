@@ -7,10 +7,4 @@ public static class Globals
         new Dictionary<GameObject, List<GameObject>>();
 
     public static List<UnitManager> SELECTED_UNITS = new List<UnitManager>();
-<<<<<<< Updated upstream
-=======
-
-
-
->>>>>>> Stashed changes
 }

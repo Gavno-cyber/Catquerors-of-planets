@@ -25,11 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4034854457763960920}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< Updated upstream
-  m_LocalPosition: {x: -0.003, y: 0.002, z: -0.15}
-=======
   m_LocalPosition: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,20 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-<<<<<<< Updated upstream
-  m_Sprite: {fileID: 21300000, guid: b2ea89fcad566364d98fc766de93a993, type: 3}
-=======
   m_Sprite: {fileID: 21300000, guid: b3accbfda66497e44a75e8b84b5d95db, type: 3}
->>>>>>> Stashed changes
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-<<<<<<< Updated upstream
-  m_Size: {x: 1.29, y: 1.28}
-=======
   m_Size: {x: 6.17, y: 6.34}
->>>>>>> Stashed changes
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -121,9 +109,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 808641843673144799, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: radius
-<<<<<<< Updated upstream
-      value: 0.7
-=======
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 808641843673144799, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
@@ -137,16 +122,11 @@ PrefabInstance:
     - target: {fileID: 808641843673144799, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: color.r
       value: 0.1333332
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 2275268620926950600, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_Sprite
       value: 
-<<<<<<< Updated upstream
-      objectReference: {fileID: 21300000, guid: cdad1fbc17f1dc7458a2e8cf45ed19a8, type: 3}
-=======
       objectReference: {fileID: 21300000, guid: b88c037f7dae82443be834005ce77b46, type: 3}
->>>>>>> Stashed changes
     - target: {fileID: 2556095197534260464, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -165,19 +145,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225696, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< Updated upstream
-      value: 3.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 6110531278738225696, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.95
-=======
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225696, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225696, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -239,19 +211,14 @@ PrefabInstance:
       propertyPath: objectToSpawn
       value: 
       objectReference: {fileID: 1186193319345000697, guid: 94b3358291e0f72488cc2a607567aa24, type: 3}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 6344997517919740126, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: radius
       value: 0
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     - target: {fileID: 6804769879512369608, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 7067651541694921347, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_Radius
       value: 3.1047974
@@ -264,7 +231,6 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     - target: {fileID: 7668343462995865310, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -289,15 +255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c495cb934b88bc8428527999a1cb56dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  max_count: 12
-  _healthpoints: 10
-=======
   team: 
   _healthpoints: 10
   max_healthpoints: 10
   max_count: 12
->>>>>>> Stashed changes
   max_range: 0
 --- !u!4 &2199246762330131787 stripped
 Transform:

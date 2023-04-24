@@ -4,25 +4,14 @@ using UnityEngine;
 
 public class MissionController : MonoBehaviour
 {
-    public GameObject planetToCapture;
     // Start is called before the first frame update
     void Start()
     {
-        
+        EventManager.AddListener("PlanetCaptured", EndGame);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void EndGame()
     {
-        if (planetToCapture.GetComponent<CaptureController>()._canspawn){
-            Time.timeScale = 0;
-            if (planetToCapture.GetComponent<Unit>().team == "player"){
-                Debug.Log("You win!");
-            }
-            else
-            {
-                Debug.Log("You lose!");
-            }
-        }
+        Time.timeScale = 0;
     }
 }

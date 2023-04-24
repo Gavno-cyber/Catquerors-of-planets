@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject objectToSpawn;
 
     CircleCollider2D circleCollider;
@@ -15,15 +14,18 @@ public class SpawnController : MonoBehaviour
 
     Vector3 _spawnPosition;
 
-    GameObject my_gameobject;
+    List<GameObject> units_planet;
 
-    GameObject _Planet; 
+    GameObject _Planet;
+
+    Unit this_stats;
 
     void Start()
     {
         _Planet = objectToSpawn.GetComponent<PlanetGravity>().planet;
-        my_gameobject = this.gameObject;
-        max_count = my_gameobject.GetComponent<Planet>().MaxSpawn;
+        units_planet = Globals.PLANETS[this.gameObject];
+        this_stats = this.GetComponent<Unit>();
+        max_count = this.gameObject.GetComponent<Planet>().MaxSpawn;
         circleCollider = GetComponent<CircleCollider2D>();
         _spawnPosition = transform.position + new Vector3(circleCollider.radius, 0, 0);
     }
@@ -32,42 +34,25 @@ public class SpawnController : MonoBehaviour
 
     void Update()
     {
-<<<<<<< Updated upstream
-        current_count = Globals.PLANETS[my_gameobject].Count;
-        if (my_gameobject.GetComponent<CaptureController>()._isCaptured && current_count < max_count)
-=======
-        current_count = Globals.PLANETS[this.gameObject].Count;
-        if (my_gameobject.GetComponent<CaptureController>()._canspawn && current_count < max_count)
->>>>>>> Stashed changes
+        timer += Time.deltaTime;
+        if (timer >= interval)
         {
-            timer += Time.deltaTime;
-            if (timer >= interval)
+            current_count = units_planet.Count;
+            if (this.gameObject.GetComponent<CaptureController>()._canspawn && current_count < max_count)
             {
-<<<<<<< Updated upstream
-                _Spawn_Planet();
-=======
                 _SpawnUnit();
->>>>>>> Stashed changes
-                timer -= interval;
             }
-        } 
+            timer -= interval;
+        }
     }
+    GameObject _objectToSpawn;
 
-<<<<<<< Updated upstream
-    void _Spawn_Planet()
-    {
-        objectToSpawn.GetComponent<PlanetGravity>().planet = my_gameobject;
-        objectToSpawn = Instantiate(objectToSpawn, _spawnPosition, Quaternion.identity);
-        Globals.PLANETS[my_gameobject].Add(objectToSpawn);
-        objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();
-=======
     void _SpawnUnit()
     {
         objectToSpawn.GetComponent<PlanetGravity>().planet = this.gameObject;
-        GameObject _objectToSpawn = Instantiate(objectToSpawn, _spawnPosition, Quaternion.identity);
-        Globals.PLANETS[my_gameobject].Add(_objectToSpawn);
+        _objectToSpawn = Instantiate(objectToSpawn, _spawnPosition, Quaternion.identity);
+        units_planet.Add(_objectToSpawn);
         _objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();
-        _objectToSpawn.GetComponent<Unit>().team = this.GetComponent<Unit>().team;
->>>>>>> Stashed changes
+        _objectToSpawn.GetComponent<Unit>().team = this_stats.team;
     }
 }

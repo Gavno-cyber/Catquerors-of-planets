@@ -7,28 +7,43 @@ public class AttackScript : MonoBehaviour
     public float interval = 5;
     float timer;
 
+    int count;
+    GameObject unit;
+    Unit unit_stats;
+    Cat this_stats;
+
+    PlanetGravity planet_gravity;
+
+    void Start()
+    {
+        this_stats = this.gameObject.GetComponent<Cat>();
+        planet_gravity = this.gameObject.GetComponent<PlanetGravity>();
+    }
+    
+    PlanetGravity unit_gravity;
+
     void Update()
     {
-        if (this.gameObject.GetComponent<PlanetGravity>().isLanded)
+        if (planet_gravity.isLanded)
         {
-
             timer += Time.deltaTime;
             if (timer >= interval)
             {
-                int count = Globals.PLANETS[this.gameObject.GetComponent<PlanetGravity>().planet].Count;
+                count = Globals.PLANETS[planet_gravity.planet].Count;
 
                 for (int i = 0; i < count; i++)
                 {
-                    GameObject unit = Globals.PLANETS[this.gameObject.GetComponent<PlanetGravity>().planet][i];
-                    Unit unit_stats = unit.GetComponent<Unit>();
+                    unit = Globals.PLANETS[planet_gravity.planet][i];
+                    unit_gravity = unit.GetComponent<PlanetGravity>();
+                    unit_stats = unit.GetComponent<Unit>();
 
-                    if (unit_stats.team != this.gameObject.GetComponent<Unit>().team && unit.GetComponent<PlanetGravity>().isLanded)
+                    if (unit_stats.team != this_stats.team && unit_gravity.isLanded)
                     {
-                        unit_stats._TakeDamage(this.gameObject.GetComponent<Cat>().Damage);
+                        unit_stats._TakeDamage(this_stats.Damage);
 
                         if (unit_stats.HP <= 0)
                         {
-                            Globals.PLANETS[unit.GetComponent<PlanetGravity>().planet].Remove(unit);
+                            Globals.PLANETS[unit_gravity.planet].Remove(unit);
                             unit.GetComponent<UnitManager>().Deselect();
                             Destroy(unit);
                         }
