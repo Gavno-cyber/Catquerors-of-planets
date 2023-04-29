@@ -15,8 +15,11 @@ public class CaptureController : MonoBehaviour
 
     protected Unit team_to_change;
 
+    protected PlanetManager planet_manager;
+
     void Start()
     {
+        planet_manager = this.gameObject.GetComponent<PlanetManager>();
         this_unit = this.gameObject.GetComponent<Unit>();
         units_of_planet = Globals.PLANETS[this.gameObject];
         current_team = this.gameObject.GetComponent<Unit>().team;
@@ -25,14 +28,16 @@ public class CaptureController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        count = units_of_planet.Count;
+        count = this.gameObject.GetComponent<PlanetManager>().Count;
+
         if (count > 0)
         {
-            if (!AnotherTeamLeft())
+            if (!this.gameObject.GetComponent<PlanetManager>().IsAnotherTeam)
             {
                 if (current_team == "")
                 {
-                    ChangeTeam();
+                    current_team = this.gameObject.GetComponent<PlanetManager>().ChangeTeam();
+                    this_unit.RestoreHP(2);
                 }
                 else
                 {
@@ -54,14 +59,6 @@ public class CaptureController : MonoBehaviour
         _canspawn = CanSpawn();
     }
 
-    public void ChangeTeam()
-    {
-        team_to_change = units_of_planet[0].GetComponent<Unit>();
-        this_unit.team = team_to_change.team;
-        current_team = this_unit.team;
-        this_unit.RestoreHP(2);
-    }
-
     public virtual bool CanSpawn()
     {
         if (this_unit.HP == this_unit.MaxHP && current_team != "")
@@ -75,14 +72,18 @@ public class CaptureController : MonoBehaviour
     }
 
     GameObject unit;
-
+    GameObject start_unit;
     public void UpdateCapturing()
     {
         for (int i = 0; i < count; i++)
         {
+            start_unit = units_of_planet[0];
             unit = units_of_planet[i];
-
-            if (current_team != units_of_planet[0].GetComponent<Unit>().team)
+            if (unit == null && start_unit == null)
+            {
+                continue;
+            }
+            if (current_team != start_unit.GetComponent<Unit>().team)
             {
                 if (unit.GetComponent<PlanetGravity>().isLanded)
                 {
@@ -93,36 +94,6 @@ public class CaptureController : MonoBehaviour
             {
                 this_unit.RestoreHP(1);
             }
-
         }
-    }
-
-    bool is_anotherTeam;
-    GameObject start_unit;
-
-    public bool AnotherTeamLeft()
-    {
-        is_anotherTeam = false;
-
-        if (count < 2){
-            return is_anotherTeam;
-        }
-
-        start_unit = units_of_planet[0];
-
-        for (int i = 0; i < count; i++)
-        {
-            unit = units_of_planet[i];
-
-            if (unit != null)
-            {
-                if (unit.GetComponent<Unit>().team != start_unit.GetComponent<Unit>().team)
-                {
-                    is_anotherTeam = true;
-                    break;
-                }
-            }
-        }
-        return is_anotherTeam;
     }
 }

@@ -19,13 +19,19 @@ public class UnitSelection : MonoBehaviour
 
     float lastClickTime;
     public float catchTime = 0.25f;
+    Ray ray;
+    RaycastHit2D hitInfo;
+
+    int count_units_for_planet;
+    List<GameObject> old_planet_units;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hitInfo = Physics2D.GetRayIntersection(ray);
+
+            ray = cam.ScreenPointToRay(Input.mousePosition);
+            hitInfo = Physics2D.GetRayIntersection(ray);
 
             if (hitInfo.collider != null) 
             {
@@ -36,17 +42,11 @@ public class UnitSelection : MonoBehaviour
                     if (hit_object.CompareTag("Planet"))
                     {
                         _SelectUnitsForPlanet();
+                        _isClicked = true;
                     }
                     else if (hit_object.CompareTag("Unit")) {
 
-                        old_planet = hit_object.GetComponent<PlanetGravity>().planet;
-
-                        for (int i = 0; i < Globals.PLANETS[old_planet].Count; i++)
-                        {
-                            GameObject unit = Globals.PLANETS[old_planet][i];
-                            if (unit.GetComponent<Unit>().GetClass() == hit_object.GetComponent<Unit>().GetClass())
-                                unit.GetComponent<UnitManager>().Select();
-                        }
+                        _SelectUnitsOfOneClass();
                         _isClicked = true;
                     }
                     else
@@ -86,28 +86,38 @@ public class UnitSelection : MonoBehaviour
         }
     }
 
+    GameObject unit;
+    UnitManager selected_unit;
+
+
     private void _SelectUnitsForPlanet()
     {
         old_planet = hit_object;
 
         hit_object.GetComponent<UnitManager>().Deselect();
 
-        int count = Globals.PLANETS[hit_object].Count;
+        int count = hit_object.GetComponent<PlanetManager>().Count;
 
         for (int i = 0; i < count; i++){ 
 
-            GameObject unit = Globals.PLANETS[hit_object][i];
+            unit = Globals.PLANETS[hit_object][i];
             
             unit.GetComponent<UnitManager>().Select();
         }
-        _isClicked = true;
     }
 
-    private void _SelectSingleUnit()
+    private void _SelectUnitsOfOneClass()
     {
         old_planet = hit_object.GetComponent<PlanetGravity>().planet;
-        hit_object.GetComponent<UnitManager>().Select(true);
-        _isClicked = true;
+
+        int count = old_planet.GetComponent<PlanetManager>().Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            unit = Globals.PLANETS[old_planet][i];
+            if (unit.GetComponent<Unit>().GetClass() == hit_object.GetComponent<Unit>().GetClass())
+                unit.GetComponent<UnitManager>().Select();
+        }
     }
 
     private void _ChangePlanetForUnit()
@@ -118,17 +128,18 @@ public class UnitSelection : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            UnitManager selected_unit = selected_units[i];
+            selected_unit = selected_units[i];
 
             selected_unit.Deselect();
 
-            if (Globals.PLANETS[hit_object].Count >= hit_object.GetComponent<Planet>().MaxSpawn)
+            if (hit_object.GetComponent<PlanetManager>().Count >= hit_object.GetComponent<Planet>().MaxSpawn)
                 continue;
-            
-            GameObject unit = selected_unit.gameObject;
+
+            unit = selected_unit.gameObject;
             unit.GetComponent<PlanetGravity>().planet = hit_object;
-            Globals.PLANETS[old_planet].Remove(unit);
-            Globals.PLANETS[hit_object].Add(unit);
+
+            old_planet.GetComponent<PlanetManager>().RemoveUnit(unit);
+            hit_object.GetComponent<PlanetManager>().AddUnit(unit);
         }
         _isClicked = false;
     }
@@ -139,9 +150,17 @@ public class UnitSelection : MonoBehaviour
 
         count = selected_units.Count;
 
-        for (int i = 0; i < count; i++){
-            UnitManager selected_unit = selected_units[i];
+        for (int i = 0; i < count; i++)
+        {
+            selected_unit = selected_units[i];
             selected_unit.Deselect();
         }
+    }
+
+    private void _SelectSingleUnit()
+    {
+        old_planet = hit_object.GetComponent<PlanetGravity>().planet;
+        hit_object.GetComponent<UnitManager>().Select(true);
+        _isClicked = true;
     }
 }

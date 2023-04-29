@@ -37,7 +37,7 @@ public class SpawnController : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= interval)
         {
-            current_count = units_planet.Count;
+            current_count = this.gameObject.GetComponent<PlanetManager>().Count;
             if (this.gameObject.GetComponent<CaptureController>()._canspawn && current_count < max_count)
             {
                 _SpawnUnit();
@@ -51,8 +51,8 @@ public class SpawnController : MonoBehaviour
     {
         objectToSpawn.GetComponent<PlanetGravity>().planet = this.gameObject;
         _objectToSpawn = Instantiate(objectToSpawn, _spawnPosition, Quaternion.identity);
-        units_planet.Add(_objectToSpawn);
-        _objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();
         _objectToSpawn.GetComponent<Unit>().team = this_stats.team;
+        this.gameObject.GetComponent<PlanetManager>().AddUnit(_objectToSpawn);
+        _objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();
     }
 }

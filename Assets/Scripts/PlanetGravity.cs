@@ -18,6 +18,7 @@ public class PlanetGravity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //velocity = this.gameObject.GetComponent<VelocityComponent>().Velocity;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -27,7 +28,9 @@ public class PlanetGravity : MonoBehaviour
         if (!_landed)
         {
             dist = Vector3.Distance(gameObject.transform.position, planet.transform.position);
+
             velocity = planet.transform.position - transform.position;
+
             rb.AddForce(velocity.normalized * (1.0f - dist / gravityDistance) * gravityForce);
 
             lookAngle = 90 + Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
