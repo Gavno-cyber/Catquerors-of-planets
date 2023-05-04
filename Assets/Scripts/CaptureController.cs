@@ -73,13 +73,16 @@ public class CaptureController : MonoBehaviour
 
     GameObject unit;
     GameObject start_unit;
+
     public void UpdateCapturing()
     {
         for (int i = 0; i < count; i++)
         {
             start_unit = units_of_planet[0];
+            
             unit = units_of_planet[i];
-            if (unit == null && start_unit == null)
+
+            if (unit == null || start_unit == null)
             {
                 continue;
             }

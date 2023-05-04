@@ -14,6 +14,7 @@ public class PlanetGravity : MonoBehaviour
     Vector3 velocity;
 
     private bool _landed = false;
+    private bool _on_planet = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,19 @@ public class PlanetGravity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        dist = Vector3.Distance(gameObject.transform.position, planet.transform.position);
+
+        if (dist - planet.GetComponent<PlanetManager>().selectionCircle.GetComponent<DrawScript>().radius < 1f)
+        {
+            _on_planet = true;
+        }
+        else
+        {
+            _on_planet = false;
+        }
+
         if (!_landed)
         {
-            dist = Vector3.Distance(gameObject.transform.position, planet.transform.position);
 
             velocity = planet.transform.position - transform.position;
 
@@ -51,5 +62,5 @@ public class PlanetGravity : MonoBehaviour
         _landed = false;
     }
 
-    public bool isLanded { get => _landed; }
+    public bool isLanded { get => _on_planet; }
 }

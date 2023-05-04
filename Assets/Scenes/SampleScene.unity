@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: max_healthpoints
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -2444113262083156793, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
+      propertyPath: had_spawner
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 808641843673144799, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
       propertyPath: radius
       value: 0.8
@@ -326,6 +330,10 @@ PrefabInstance:
     - target: {fileID: 523540443350860377, guid: 3aca4e219ce35ff42b67e8cab1811fa3, type: 3}
       propertyPath: _canspawn
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467469127755047852, guid: 3aca4e219ce35ff42b67e8cab1811fa3, type: 3}
+      propertyPath: had_spawner
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2199246762330131780, guid: 3aca4e219ce35ff42b67e8cab1811fa3, type: 3}
       propertyPath: interval
@@ -504,6 +512,10 @@ PrefabInstance:
       propertyPath: max_healthpoints
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -2444113262083156793, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
+      propertyPath: had_spawner
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 808641843673144799, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
       propertyPath: radius
       value: 0.8
@@ -581,6 +593,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1467469127755047852, guid: 51f0e9d13ea92dc40b0725108b229954, type: 3}
+      propertyPath: had_spawner
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2199246762330131780, guid: 51f0e9d13ea92dc40b0725108b229954, type: 3}
       propertyPath: interval
       value: 2
@@ -882,6 +898,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 1924421319859672901, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}
+      propertyPath: had_spawner
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3371864400411782492, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -898,6 +918,5 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 696484375640356528, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}

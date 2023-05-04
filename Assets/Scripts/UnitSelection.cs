@@ -102,7 +102,11 @@ public class UnitSelection : MonoBehaviour
 
             unit = Globals.PLANETS[hit_object][i];
             
-            unit.GetComponent<UnitManager>().Select();
+            if (unit != null)
+            {
+                unit.GetComponent<UnitManager>().Select();
+            }
+            
         }
     }
 

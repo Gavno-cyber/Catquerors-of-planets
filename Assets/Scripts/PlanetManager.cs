@@ -12,8 +12,36 @@ public class PlanetManager : UnitManager
     public bool IsAnotherTeam { get => is_anotherTeam; }
     public int Count { get => count; }
 
+    [SerializeField] private bool had_spawner;
+
+    public bool HadSpawner {
+
+        get => had_spawner;
+
+        set
+        {
+            had_spawner = value; 
+            if (had_spawner)
+            {
+                this.gameObject.GetComponent<SpawnController>().enabled = true;
+            }
+            else
+            {
+                this.gameObject.GetComponent<SpawnController>().enabled = false;
+            }
+        } 
+    }
+
     void Start()
     {
+        if (had_spawner)
+        {
+            this.gameObject.GetComponent<SpawnController>().enabled = true;
+        }
+        else
+        {
+            this.gameObject.GetComponent<SpawnController>().enabled = false;
+        }
         selectionRange.GetComponent<DrawScript>().radius = this.gameObject.GetComponent<Planet>().MaxRange;
         selectionCircle.GetComponent<DrawScript>().radius = (this.gameObject.GetComponent<CircleCollider2D>().radius * this.gameObject.transform.localScale.x) + 0.1f;
     }

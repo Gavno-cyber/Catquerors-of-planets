@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1183565839182346658}
   - component: {fileID: 6571677438565900106}
   - component: {fileID: 2789274834380355841}
-  - component: {fileID: 696484375640356528}
   - component: {fileID: 1924421319859672901}
   - component: {fileID: 4586175787484501004}
+  - component: {fileID: 7850357525439456882}
   m_Layer: 6
   m_Name: PlanetToCapture
   m_TagString: Untagged
@@ -106,20 +106,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.1047974
---- !u!114 &696484375640356528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183565839182346659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a0b1c4093159e448877684c80fb99a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canspawn: 0
-  interval: 2
 --- !u!114 &1924421319859672901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionCircle: {fileID: 9078814940930019421}
   selectionRange: {fileID: 3371864400411782492}
+  had_spawner: 0
 --- !u!114 &4586175787484501004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +138,20 @@ MonoBehaviour:
   max_healthpoints: 50
   max_count: 50
   max_range: 20
+--- !u!114 &7850357525439456882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183565839182346659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fda6d90243449546bad450b45520283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 1186193319345000697, guid: 7e8cafa53324b4945b9f1c0288e3fa63, type: 3}
+  interval: 5
 --- !u!1001 &1251769316107448029
 PrefabInstance:
   m_ObjectHideFlags: 0

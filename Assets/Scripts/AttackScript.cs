@@ -19,6 +19,8 @@ public class AttackScript : MonoBehaviour
 
     bool is_busy = false;
 
+    bool reaching_enemy = false;
+
     void Start()
     {
         this_stats = this.gameObject.GetComponent<Cat>();
@@ -49,6 +51,7 @@ public class AttackScript : MonoBehaviour
                     {
                         if (IsWithinRange(unit_to_damage))
                         {
+                            reaching_enemy = false;
                             timer += Time.deltaTime;
                             if (timer >= interval)
                             {
@@ -58,16 +61,24 @@ public class AttackScript : MonoBehaviour
                         }
                         else
                         {
+                            reaching_enemy = true;
                             ReachToEnemy();
                         }
                     }
                 }
                 else
                 {
+                    reaching_enemy = false;
                     FindEnemy();
                 }
             }
+            else
+            {
+                reaching_enemy = false;
+            }
         }
+        else
+            reaching_enemy = false;
     }
 
     public void FindEnemy()
@@ -106,6 +117,7 @@ public class AttackScript : MonoBehaviour
 
     public void ReachToEnemy()
     {
+        
         float sign = Mathf.Sign(this.gameObject.transform.localPosition.x - unit_to_damage.transform.localPosition.x);
 
         if (sign == 1)
@@ -119,7 +131,26 @@ public class AttackScript : MonoBehaviour
 
         this.gameObject.GetComponent<UnitMovement>().Speed = 2;
     }
-        
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (unit_to_damage != null){
+            if (reaching_enemy)
+            {
+                Debug.Log("No defenetly");
+                if (Vector3.Distance(this.gameObject.transform.position, unit_to_damage.transform.position) < 4.15f)
+                {
+                    Debug.Log("No");
+                    if (col.gameObject.CompareTag("Unit") && col.gameObject != unit_to_damage)
+                    {
+                        Debug.Log("EYAAGH");
+                        this.gameObject.GetComponent<UnitMovement>().rb.AddRelativeForce(Vector3.up * 300);
+                    }
+                }
+            }
+        }
+    }
+
     public bool IsWithinRange(GameObject unit)
     {
         this.gameObject.GetComponent<UnitMovement>().Speed = 0;

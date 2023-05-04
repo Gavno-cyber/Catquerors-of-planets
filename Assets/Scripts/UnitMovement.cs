@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitMovement : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     public float speed = 1;
 
@@ -22,7 +22,8 @@ public class UnitMovement : MonoBehaviour
     void Update()
     {
         //transform.Translate(Vector2.right * (Time.deltaTime * speed), Space.Self);
-        transform.Translate(direction * (Time.deltaTime * speed), Space.Self);
+        //transform.Translate(direction * (Time.deltaTime * speed), Space.Self);
+        rb.AddRelativeForce(direction * (0.2f * speed));
     }
 
     public void SetDirection(Vector3 direction)
