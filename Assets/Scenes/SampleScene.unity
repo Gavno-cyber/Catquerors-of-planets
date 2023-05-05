@@ -244,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3466111690988959840, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
       propertyPath: max_range
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -3466111690988959840, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
       propertyPath: max_healthpoints
@@ -312,7 +312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225711, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
       propertyPath: interval
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225711, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
       propertyPath: objectToSpawn
@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2199246762330131780, guid: 3aca4e219ce35ff42b67e8cab1811fa3, type: 3}
       propertyPath: interval
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2199246762330131780, guid: 3aca4e219ce35ff42b67e8cab1811fa3, type: 3}
       propertyPath: max_count
@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623659513903570965, guid: 3aca4e219ce35ff42b67e8cab1811fa3, type: 3}
       propertyPath: max_healthpoints
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aca4e219ce35ff42b67e8cab1811fa3, type: 3}
@@ -574,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225711, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
       propertyPath: interval
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225711, guid: a6a29805d0393f746ad9298e23a5bc36, type: 3}
       propertyPath: objectToSpawn
@@ -599,7 +599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2199246762330131780, guid: 51f0e9d13ea92dc40b0725108b229954, type: 3}
       propertyPath: interval
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2199246762330131780, guid: 51f0e9d13ea92dc40b0725108b229954, type: 3}
       propertyPath: max_count
@@ -907,12 +907,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4586175787484501004, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}
+      propertyPath: max_count
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586175787484501004, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}
       propertyPath: max_range
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4586175787484501004, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}
       propertyPath: _healthpoints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586175787484501004, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}
+      propertyPath: max_healthpoints
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9078814940930019421, guid: 153e849c33f87fb4cbd9246ea1fd5416, type: 3}
       propertyPath: m_IsActive

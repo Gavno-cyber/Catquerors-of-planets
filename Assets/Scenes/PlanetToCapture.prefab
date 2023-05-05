@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 
-  _healthpoints: 50
-  max_healthpoints: 50
-  max_count: 50
-  max_range: 20
+  _healthpoints: 0
+  max_healthpoints: 30
+  max_count: 30
+  max_range: 10
 --- !u!114 &7850357525439456882
 MonoBehaviour:
   m_ObjectHideFlags: 0

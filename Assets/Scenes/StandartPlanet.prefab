@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionCircle: {fileID: 4133819680026416095}
   selectionRange: {fileID: 7668343462995865310}
+  had_spawner: 0
 --- !u!114 &-3466111690988959840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,8 +165,8 @@ MonoBehaviour:
   team: 
   _healthpoints: 10
   max_healthpoints: 10
-  max_count: 5
-  max_range: 6
+  max_count: 15
+  max_range: 10
 --- !u!1001 &489254473126596702
 PrefabInstance:
   m_ObjectHideFlags: 0

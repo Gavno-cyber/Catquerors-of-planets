@@ -205,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225711, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: interval
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6110531278738225711, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: objectToSpawn
@@ -256,10 +256,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 
-  _healthpoints: 10
+  _healthpoints: 0
   max_healthpoints: 10
-  max_count: 12
-  max_range: 0
+  max_count: 10
+  max_range: 10
 --- !u!4 &2199246762330131787 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6110531278738225696, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
