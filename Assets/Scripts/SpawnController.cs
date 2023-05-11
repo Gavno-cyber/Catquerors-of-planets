@@ -56,5 +56,7 @@ public class SpawnController : MonoBehaviour
         this.gameObject.GetComponent<PlanetManager>().AddUnit(_objectToSpawn);
         _objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();
         _objectToSpawn.GetComponent<Interactive>().info = GameObject.FindWithTag("CatInfo").GetComponent<Text>();
+        _objectToSpawn.GetComponent<Interactive>().infoPlanets = GameObject.FindWithTag("infPlanets");
+        _objectToSpawn.GetComponent<Interactive>().infoCats = GameObject.FindWithTag("infCats");
     }
 }
