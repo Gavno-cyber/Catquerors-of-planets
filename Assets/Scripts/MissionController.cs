@@ -13,5 +13,6 @@ public class MissionController : MonoBehaviour
     private void EndGame()
     {
         Time.timeScale = 0;
+        PlayerPrefs.SetInt("level", 2);
     }
 }

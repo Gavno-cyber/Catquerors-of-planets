@@ -226,6 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 0}
   textField: {fileID: 0}
+  infoPlanets: {fileID: 0}
+  infoCats: {fileID: 0}
 --- !u!1001 &7434678411107194491
 PrefabInstance:
   m_ObjectHideFlags: 0

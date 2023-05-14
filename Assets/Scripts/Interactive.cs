@@ -28,9 +28,7 @@ public class Interactive : MonoBehaviour
                 max = GetComponent<PlanetAttack>().MaxSpawn;
                 range = GetComponent<PlanetAttack>().MaxRange;
                 info = textField.GetComponent<Text>();
-                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t   " + max + '\n' + "\t\t\t" + range;
-                infoPlanets.SetActive(true);
-                infoCats.SetActive(false);
+                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t    " + max + '\n' + "\t\t\t " + range;
                 break;
             case "StandartPlanet":
                 unit = "Планета";
@@ -38,9 +36,7 @@ public class Interactive : MonoBehaviour
                 max = GetComponent<StandartPlanet>().MaxSpawn;
                 range = GetComponent<StandartPlanet>().MaxRange;
                 info = textField.GetComponent<Text>();
-                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t   " + max + '\n' + "\t\t\t" + range;
-                infoPlanets.SetActive(true);
-                infoCats.SetActive(false);
+                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t    " + max + '\n' + "\t\t\t " + range;
                 break;
             case "StandartPlanet (1)":
                 unit = "Планета";
@@ -48,9 +44,7 @@ public class Interactive : MonoBehaviour
                 max = GetComponent<StandartPlanet>().MaxSpawn;
                 range = GetComponent<StandartPlanet>().MaxRange;
                 info = textField.GetComponent<Text>();
-                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t   " + max + '\n' + "\t\t\t" + range;
-                infoPlanets.SetActive(true);
-                infoCats.SetActive(false);
+                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t    " + max + '\n' + "\t\t\t " + range;
                 break;
             case "Planet (6)":
                 unit = "Планета";
@@ -58,9 +52,7 @@ public class Interactive : MonoBehaviour
                 max = GetComponent<PlanetDefend>().MaxSpawn;
                 range = GetComponent<PlanetDefend>().MaxRange;
                 info = textField.GetComponent<Text>();
-                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t   " + max + '\n' + "\t\t\t" + range;
-                infoPlanets.SetActive(true);
-                infoCats.SetActive(false);
+                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t    " + max + '\n' + "\t\t\t " + range;
                 break;
             case "BasePlanet":
 ;               unit = "Планета";
@@ -68,9 +60,7 @@ public class Interactive : MonoBehaviour
                 max = GetComponent<StandartPlanet>().MaxSpawn;
                 range = GetComponent<StandartPlanet>().MaxRange;
                 info = textField.GetComponent<Text>();
-                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t   " + max + '\n' + "\t\t\t" + range;
-                infoPlanets.SetActive(true);
-                infoCats.SetActive(false);
+                info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t\t    " + max + '\n' + "\t\t\t " + range;
                 break;
 
             case "Standart1(Clone)":
@@ -81,8 +71,6 @@ public class Interactive : MonoBehaviour
                 damage = GetComponent<CatStandart>().Damage;
                 info = info.GetComponent<Text>();
                 info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t  " + team + '\n' + "\t\t   " + health + '\n' + "   " + damage;
-                infoPlanets.SetActive(false);
-                infoCats.SetActive(true);
                 break;
             case "Standart2(Clone)":
                 unit = "Кот";
@@ -92,8 +80,6 @@ public class Interactive : MonoBehaviour
                 damage = GetComponent<CatStandart>().Damage;
                 info = info.GetComponent<Text>();
                 info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t  " + team + '\n' + "\t\t   " + health + '\n' + "   " + damage;
-                infoPlanets.SetActive(false);
-                infoCats.SetActive(true);
                 break;
             case "Attacker(Clone)":
                 unit = "Кот";
@@ -103,8 +89,6 @@ public class Interactive : MonoBehaviour
                 damage = GetComponent<CatDamager>().Damage;
                 info = info.GetComponent<Text>();
                 info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t  " + team + '\n' + "\t\t   " + health + '\n' + "   " + damage;
-                infoPlanets.SetActive(false);
-                infoCats.SetActive(true);
                 break;
             case "Defender(Clone)":
                 unit = "Кот";
@@ -114,8 +98,6 @@ public class Interactive : MonoBehaviour
                 damage = GetComponent<CatDefender>().Damage;
                 info = info.GetComponent<Text>();
                 info.text = "    " + unit + '\n' + " " + typeUnit + '\n' + "\t\t  " + team + '\n' + "\t\t   " + health + '\n' + "   " + damage;
-                infoPlanets.SetActive(false);
-                infoCats.SetActive(true);
                 break;
         }
     }
