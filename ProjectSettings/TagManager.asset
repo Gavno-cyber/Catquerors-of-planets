@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: CaptureCircle
+    uniqueID: 1608710549
+    locked: 0
+  - name: MaskRadius
+    uniqueID: 383813929
+    locked: 0

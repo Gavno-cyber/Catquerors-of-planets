@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CaptureController : MonoBehaviour
 {
-    public bool _canspawn = false;
+    public bool _captured = false;
     float timer;
     public float interval = 2;
-    protected string current_team = "";
+    protected PlayerData current_team;
     int count;
 
     protected Unit this_unit;
@@ -22,46 +22,60 @@ public class CaptureController : MonoBehaviour
         planet_manager = this.gameObject.GetComponent<PlanetManager>();
         this_unit = this.gameObject.GetComponent<Unit>();
         units_of_planet = Globals.PLANETS[this.gameObject];
-        current_team = this.gameObject.GetComponent<Unit>().team;
+        current_team = this_unit.Team;
     }
 
-    // Update is called once per frame
     void Update()
     {
         count = this.gameObject.GetComponent<PlanetManager>().Count;
 
         if (count > 0)
         {
-            if (!this.gameObject.GetComponent<PlanetManager>().IsAnotherTeam)
+            if (Globals.PLANETS[this.gameObject][0].GetComponent<PlanetGravity>().isLanded)
             {
-                if (current_team == "")
+                if (!this.gameObject.GetComponent<PlanetManager>().IsAnotherTeam)
                 {
-                    current_team = this.gameObject.GetComponent<PlanetManager>().ChangeTeam();
-                    this_unit.RestoreHP(2);
-                }
-                else
-                {
-                    timer += Time.deltaTime;
-                    if (timer >= interval)
+                    if (_captured && this_unit.Team == null)
                     {
-                        UpdateCapturing();
-                        timer -= interval;
+                        this_unit.ChangeTeam(Globals.PLANETS[this.gameObject][0].GetComponent<Unit>().Team);
+                        current_team = this_unit.Team;
+                        this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(false);
+                        this.gameObject.GetComponent<PlanetManager>().flag.SetActive(true);
+                        this.gameObject.GetComponent<PlanetManager>().flag.GetComponent<SpriteRenderer>().color = this_unit.Team.Color;
+                        if (Globals.MYTEAM == this_unit.Team)
+                        {
+                            this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(true);
+                        }
+                        else
+                        {
+                            this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(false);
+                        }
+                    }
+                    else if (!_captured)
+                    {
+                        timer += Time.deltaTime;
+                        if (timer >= interval)
+                        {
+                            UpdateCapturing();
+                            timer -= interval;
+                        }
                     }
                 }
-            }
 
-            if (this_unit.HP == 0)
-            {
-                this_unit.team = "";
-                current_team = "";
+                if (this_unit.HP == 0)
+                {
+                    this_unit.Team = null;
+                    current_team = null;
+                }
             }
+                
         }
-        _canspawn = CanSpawn();
+        _captured = IsCaptured();
     }
 
-    public virtual bool CanSpawn()
+    public virtual bool IsCaptured()
     {
-        if (this_unit.HP == this_unit.MaxHP && current_team != "")
+        if (this_unit.HP == this_unit.MaxHP)
         {
             return true;
         }
@@ -78,24 +92,25 @@ public class CaptureController : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            start_unit = units_of_planet[0];
-            
             unit = units_of_planet[i];
 
-            if (unit == null || start_unit == null)
+            if (unit == null)
             {
                 continue;
             }
-            if (current_team != start_unit.GetComponent<Unit>().team)
+            this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(true);
+            if (current_team != unit.GetComponent<Unit>().Team && current_team != null)
             {
                 if (unit.GetComponent<PlanetGravity>().isLanded)
                 {
-                    this_unit._TakeDamage(unit.GetComponent<Cat>().Damage);
+                    this_unit.ChangeHP(unit.GetComponent<Cat>().Damage * -1);
                 }
             }
             else
             {
-                this_unit.RestoreHP(1);
+                
+                this_unit.SetColor(unit.GetComponent<Unit>().Team.Color);
+                this_unit.ChangeHP(1);
             }
         }
     }

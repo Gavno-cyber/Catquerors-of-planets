@@ -30,4 +30,9 @@ public class UnitMovement : MonoBehaviour
     {
         this.direction = direction;
     }
+
+    public void Jump(float height)
+    {
+        rb.AddRelativeForce(Vector3.up * height);
+    }
 }

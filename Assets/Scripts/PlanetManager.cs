@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlanetManager : UnitManager
 {
     public GameObject selectionRange;
+    public GameObject flag;
 
     private bool is_anotherTeam = false;
     private int count;
@@ -12,6 +13,7 @@ public class PlanetManager : UnitManager
     public bool IsAnotherTeam { get => is_anotherTeam; }
     public int Count { get => count; }
 
+    [SerializeField] private string start_team;
     [SerializeField] private bool had_spawner;
 
     public bool HadSpawner {
@@ -37,12 +39,31 @@ public class PlanetManager : UnitManager
         if (had_spawner)
         {
             this.gameObject.GetComponent<SpawnController>().enabled = true;
+            for (int i = 0; i < Globals.PLAYERS.Count; i++) 
+            {
+                if (start_team == Globals.PLAYERS[i].Team)
+                {
+                    this.gameObject.GetComponent<Unit>().ChangeTeam(Globals.PLAYERS[i]);
+                    flag.SetActive(true);
+                    this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(false);
+                    flag.GetComponent<SpriteRenderer>().color = this.gameObject.GetComponent<Unit>().Team.Color;
+                }
+            } 
         }
         else
         {
             this.gameObject.GetComponent<SpawnController>().enabled = false;
         }
-        selectionRange.GetComponent<DrawScript>().radius = this.gameObject.GetComponent<Planet>().MaxRange;
+
+        if (Globals.MYTEAM != this.gameObject.GetComponent<Unit>().Team)
+        {
+            maskCircle.SetActive(false);
+        }
+
+        float range = this.gameObject.GetComponent<Planet>().MaxRange; 
+
+        maskCircle.transform.localScale = new Vector3(range * 4 + 1, range * 4 + 1, 1);
+        selectionRange.GetComponent<DrawScript>().radius = range;
         selectionCircle.GetComponent<DrawScript>().radius = (this.gameObject.GetComponent<CircleCollider2D>().radius * this.gameObject.transform.localScale.x) + 0.1f;
     }
 
@@ -80,33 +101,24 @@ public class PlanetManager : UnitManager
             return;
         }
 
-        start_unit = Globals.PLANETS[this.gameObject][0];
-
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count - 1; i++)
         {
             GameObject unit = Globals.PLANETS[this.gameObject][i];
-            if (unit != null && start_unit != null)
+            GameObject next_unit = Globals.PLANETS[this.gameObject][i + 1];
+            if (unit != null && next_unit != null)
             {
-                if (unit.GetComponent<Unit>().team != start_unit.GetComponent<Unit>().team)
+                if (unit.GetComponent<Unit>().Team != next_unit.GetComponent<Unit>().Team)
                 {
                     is_anotherTeam = true;
                     return;
                 }
             }
         }
-
         is_anotherTeam = false;
     }
 
     public void CountUnits()
     {
         count = Globals.PLANETS[this.gameObject].Count;
-    }
-
-    public string ChangeTeam()
-    {
-        Unit team_to_change = Globals.PLANETS[this.gameObject][0].GetComponent<Unit>();
-        this.gameObject.GetComponent<Unit>().team = team_to_change.team;
-        return this.gameObject.GetComponent<Unit>().team;
     }
 }

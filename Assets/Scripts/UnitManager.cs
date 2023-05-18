@@ -5,13 +5,16 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour
 {
     public GameObject selectionCircle;
+    public GameObject maskCircle;
 
     public void Select() { Select(false); }
 
-    public void Select(bool clearSelection)
+    public virtual void Select(bool clearSelection)
     {
-        
-        if (Globals.SELECTED_UNITS.Contains(this)) Deselect();
+        if (Globals.SELECTED_UNITS.Contains(this))
+        {
+            Deselect();
+        }
         if (clearSelection)
         {
             List<UnitManager> selectedUnits = new List<UnitManager>(Globals.SELECTED_UNITS);
