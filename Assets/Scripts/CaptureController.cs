@@ -31,43 +31,42 @@ public class CaptureController : MonoBehaviour
 
         if (count > 0)
         {
-            if (Globals.PLANETS[this.gameObject][0].GetComponent<PlanetGravity>().isLanded)
+
+            if (!this.gameObject.GetComponent<PlanetManager>().IsAnotherTeam)
             {
-                if (!this.gameObject.GetComponent<PlanetManager>().IsAnotherTeam)
+                if (_captured && this_unit.Team == null)
                 {
-                    if (_captured && this_unit.Team == null)
+                    this_unit.ChangeTeam(Globals.PLANETS[this.gameObject][0].GetComponent<Unit>().Team);
+                    current_team = this_unit.Team;
+                    this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(false);
+                    this.gameObject.GetComponent<PlanetManager>().flag.SetActive(true);
+                    this.gameObject.GetComponent<PlanetManager>().flag.GetComponent<SpriteRenderer>().color = this_unit.Team.Color;
+                    if (Globals.MYTEAM == this_unit.Team)
                     {
-                        this_unit.ChangeTeam(Globals.PLANETS[this.gameObject][0].GetComponent<Unit>().Team);
-                        current_team = this_unit.Team;
-                        this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(false);
-                        this.gameObject.GetComponent<PlanetManager>().flag.SetActive(true);
-                        this.gameObject.GetComponent<PlanetManager>().flag.GetComponent<SpriteRenderer>().color = this_unit.Team.Color;
-                        if (Globals.MYTEAM == this_unit.Team)
-                        {
-                            this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(true);
-                        }
-                        else
-                        {
-                            this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(false);
-                        }
+                        this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(true);
                     }
-                    else if (!_captured)
+                    else
                     {
-                        timer += Time.deltaTime;
-                        if (timer >= interval)
-                        {
-                            UpdateCapturing();
-                            timer -= interval;
-                        }
+                        this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(false);
                     }
                 }
-
-                if (this_unit.HP == 0)
+                else if (!_captured)
                 {
-                    this_unit.Team = null;
-                    current_team = null;
+                    timer += Time.deltaTime;
+                    if (timer >= interval)
+                    {
+                        UpdateCapturing();
+                        timer -= interval;
+                    }
                 }
             }
+
+            if (this_unit.HP == 0)
+            {
+                this_unit.Team = null;
+                current_team = null;
+            }
+            
                 
         }
         _captured = IsCaptured();

@@ -5,9 +5,12 @@ using UnityEngine;
 public class CatsManager : UnitManager
 {
     public GameObject catSprite;
+
     void Start()
     {
-        if (Globals.MYTEAM != this.gameObject.GetComponent<Unit>().Team)
+        team = this.gameObject.GetComponent<Unit>().Team;
+
+        if (Globals.MYTEAM != team)
         {
             maskCircle.SetActive(false);
         }
@@ -16,23 +19,25 @@ public class CatsManager : UnitManager
 
     public override void Select(bool clearSelection)
     {
-        if (Globals.MYTEAM != this.gameObject.GetComponent<Unit>().Team)
+        if (Globals.MYTEAM == team)
         {
-            return;
-        }
+            ActivateCircle();
+        }    
+        SelectUnits(clearSelection, Globals.SELECTED_UNITS[team]);
+    }
 
-        if (Globals.SELECTED_UNITS.Contains(this))
+    private void SelectUnits(bool clearSelection, List<UnitManager> selected_units)
+    {
+        if (selected_units.Contains(this))
         {
             Deselect();
         }
         if (clearSelection)
         {
-            List<UnitManager> selectedUnits = new List<UnitManager>(Globals.SELECTED_UNITS);
-            foreach (UnitManager um in selectedUnits)
+            foreach (UnitManager um in selected_units)
                 um.Deselect();
         }
 
-        Globals.SELECTED_UNITS.Add(this);
-        ActivateCircle();
+        selected_units.Add(this);
     }
 }

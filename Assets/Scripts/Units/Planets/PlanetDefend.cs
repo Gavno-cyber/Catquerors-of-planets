@@ -15,6 +15,6 @@ public class PlanetDefend : Planet
     }
     public override string GetClass()
     {
-        return "Standart";
+        return "Defend";
     }
 }

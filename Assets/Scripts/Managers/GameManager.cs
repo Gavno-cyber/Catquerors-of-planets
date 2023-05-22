@@ -17,5 +17,10 @@ public class GameManager : MonoBehaviour
         {
             Globals.PLANETS.Add(planet, new List<GameObject>());
         }
+
+        foreach (PlayerData player in Globals.PLAYERS)
+        {
+            Globals.SELECTED_UNITS.Add(player, new List<UnitManager>());
+        }
     }
 }

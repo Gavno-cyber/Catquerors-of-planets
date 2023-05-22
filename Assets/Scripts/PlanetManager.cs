@@ -13,7 +13,7 @@ public class PlanetManager : UnitManager
     public bool IsAnotherTeam { get => is_anotherTeam; }
     public int Count { get => count; }
 
-    [SerializeField] private string start_team;
+    [SerializeField] public string start_team;
     [SerializeField] private bool had_spawner;
 
     public bool HadSpawner {
@@ -36,6 +36,7 @@ public class PlanetManager : UnitManager
 
     void Start()
     {
+        team = this.gameObject.GetComponent<Unit>().Team;
         if (had_spawner)
         {
             this.gameObject.GetComponent<SpawnController>().enabled = true;
@@ -65,6 +66,30 @@ public class PlanetManager : UnitManager
         maskCircle.transform.localScale = new Vector3(range * 4 + 1, range * 4 + 1, 1);
         selectionRange.GetComponent<DrawScript>().radius = range;
         selectionCircle.GetComponent<DrawScript>().radius = (this.gameObject.GetComponent<CircleCollider2D>().radius * this.gameObject.transform.localScale.x) + 0.1f;
+    }
+
+    public override void Select(bool clearSelection)
+    {
+        if (Globals.SELECTED_UNITS[Globals.MYTEAM].Contains(this))
+        {
+            Deselect();
+        }
+        if (clearSelection)
+        {
+            List<UnitManager> selectedUnits = new List<UnitManager>(Globals.SELECTED_UNITS[team]);
+            foreach (UnitManager um in selectedUnits)
+                um.Deselect();
+        }
+
+        Globals.SELECTED_UNITS[Globals.MYTEAM].Add(this);
+        ActivateCircle();
+    }
+
+    public override void Deselect()
+    {
+        if (!Globals.SELECTED_UNITS[Globals.MYTEAM].Contains(this)) return;
+        Globals.SELECTED_UNITS[Globals.MYTEAM].Remove(this);
+        DisactivateCircle();
     }
 
     public override void ActivateCircle()
