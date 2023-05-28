@@ -8,11 +8,15 @@ public class AttackScript : MonoBehaviour
     float timer;
 
     int count;
+
     GameObject unit;
+
     Unit unit_stats;
+
     Cat this_stats;
 
     PlanetGravity planet_gravity;
+
     PlanetManager planet_manager;
 
     List<GameObject> units;
@@ -43,27 +47,24 @@ public class AttackScript : MonoBehaviour
     {
         if (planet_gravity.isLanded)
         {
-            if (planet_gravity.planet.GetComponent<PlanetManager>().IsAnotherTeam)
+            if (this.gameObject.GetComponent<PlanetGravity>().planet.GetComponent<PlanetManager>().IsAnotherTeam)
             {
-                if (is_busy)
+                if (is_busy && unit_to_damage != null)
                 {
-                    if (unit_to_damage != null)
+                    if (IsWithinRange(unit_to_damage))
                     {
-                        if (IsWithinRange(unit_to_damage))
+                        reaching_enemy = false;
+                        timer += Time.deltaTime;
+                        if (timer >= interval)
                         {
-                            reaching_enemy = false;
-                            timer += Time.deltaTime;
-                            if (timer >= interval)
-                            {
-                                AttackEnemy();
-                                timer -= interval;
-                            }
+                            AttackEnemy();
+                            timer -= interval;
                         }
-                        else
-                        {
-                            reaching_enemy = true;
-                            ReachToEnemy();
-                        }
+                    }
+                    else
+                    {
+                        reaching_enemy = true;
+                        ReachToEnemy();
                     }
                 }
                 else
@@ -100,7 +101,7 @@ public class AttackScript : MonoBehaviour
             unit_gravity = unit.GetComponent<PlanetGravity>();
             unit_stats = unit.GetComponent<Unit>();
 
-            if (unit_stats.team != this_stats.team && unit_gravity.isLanded)
+            if (unit_stats.Team != this_stats.Team && unit_gravity.isLanded)
             {
                 dist = Vector3.Distance(this.gameObject.transform.position, unit.transform.position);
 
@@ -117,7 +118,6 @@ public class AttackScript : MonoBehaviour
 
     public void ReachToEnemy()
     {
-        
         float sign = Mathf.Sign(this.gameObject.transform.localPosition.x - unit_to_damage.transform.localPosition.x);
 
         if (sign == 1)
@@ -134,17 +134,15 @@ public class AttackScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (unit_to_damage != null){
+        if (unit_to_damage != null)
+        {
             if (reaching_enemy)
             {
-                Debug.Log("No defenetly");
                 if (Vector3.Distance(this.gameObject.transform.position, unit_to_damage.transform.position) < 4.15f)
                 {
-                    Debug.Log("No");
                     if (col.gameObject.CompareTag("Unit") && col.gameObject != unit_to_damage)
                     {
-                        Debug.Log("EYAAGH");
-                        this.gameObject.GetComponent<UnitMovement>().rb.AddRelativeForce(Vector3.up * 300);
+                        this.gameObject.GetComponent<UnitMovement>().Jump(200);
                     }
                 }
             }
@@ -166,7 +164,7 @@ public class AttackScript : MonoBehaviour
 
     public void ApplyDamage(GameObject unit)
     {
-        if (unit_stats.HP <= 0)
+        if (unit.GetComponent<Unit>().HP <= 0)
         {
             unit_to_damage = null;
             planet_manager.RemoveUnit(unit);
@@ -174,6 +172,7 @@ public class AttackScript : MonoBehaviour
             Destroy(unit);
             is_busy = false;
         }
-        unit_stats._TakeDamage(this_stats.Damage);
+        else
+            unit.GetComponent<Unit>().ChangeHP(this_stats.Damage * -0.1f);
     }
 }

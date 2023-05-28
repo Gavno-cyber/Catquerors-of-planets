@@ -8,4 +8,9 @@ public abstract class Cat : Unit
 
     public bool IsAttacked { get => _attacked; set => _attacked = value; }
     public int Damage { get => _damage; }
+
+    public override void SetColor(Color color)
+    {
+        this.gameObject.GetComponent<CatsManager>().catSprite.GetComponent<SpriteRenderer>().color = color;
+    }
 }

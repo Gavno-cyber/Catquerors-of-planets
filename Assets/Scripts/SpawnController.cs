@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpawnController : MonoBehaviour
 {
@@ -39,7 +38,7 @@ public class SpawnController : MonoBehaviour
         if (timer >= interval)
         {
             current_count = this.gameObject.GetComponent<PlanetManager>().Count;
-            if (this.gameObject.GetComponent<CaptureController>()._canspawn && current_count < max_count)
+            if (this.gameObject.GetComponent<CaptureController>()._captured && current_count < max_count)
             {
                 _SpawnUnit();
             }
@@ -52,11 +51,8 @@ public class SpawnController : MonoBehaviour
     {
         objectToSpawn.GetComponent<PlanetGravity>().planet = this.gameObject;
         _objectToSpawn = Instantiate(objectToSpawn, _spawnPosition, Quaternion.identity);
-        _objectToSpawn.GetComponent<Unit>().team = this_stats.team;
+        _objectToSpawn.GetComponent<Unit>().ChangeTeam(this.gameObject.GetComponent<Unit>().Team);
         this.gameObject.GetComponent<PlanetManager>().AddUnit(_objectToSpawn);
         _objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();
-        _objectToSpawn.GetComponent<Interactive>().info = GameObject.FindWithTag("CatInfo").GetComponent<Text>();
-        _objectToSpawn.GetComponent<Interactive>().infoPlanets = GameObject.FindWithTag("infPlanets");
-        _objectToSpawn.GetComponent<Interactive>().infoCats = GameObject.FindWithTag("infCats");
     }
 }
