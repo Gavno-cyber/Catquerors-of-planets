@@ -31,33 +31,24 @@ public class CaptureController : MonoBehaviour
 
         if (count > 0)
         {
-
             if (!this.gameObject.GetComponent<PlanetManager>().IsAnotherTeam)
             {
                 if (_captured && this_unit.Team == null)
                 {
-                    this_unit.ChangeTeam(Globals.PLANETS[this.gameObject][0].GetComponent<Unit>().Team);
-                    current_team = this_unit.Team;
-                    this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(false);
-                    this.gameObject.GetComponent<PlanetManager>().flag.SetActive(true);
-                    this.gameObject.GetComponent<PlanetManager>().flag.GetComponent<SpriteRenderer>().color = this_unit.Team.Color;
-                    if (Globals.MYTEAM == this_unit.Team)
-                    {
-                        this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(true);
-                    }
-                    else
-                    {
-                        this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(false);
-                    }
+                    ChangeTeam();
                 }
-                else if (!_captured)
+                else
                 {
-                    timer += Time.deltaTime;
-                    if (timer >= interval)
+                    if (Globals.PLANETS[this.gameObject][Globals.PLANETS[this.gameObject].Count - 1].GetComponent<Unit>().Team != this_unit.Team)
                     {
                         UpdateCapturing();
-                        timer -= interval;
                     }
+                    //timer += Time.deltaTime;
+                    //if (timer >= interval)
+                    //{
+                    //    UpdateCapturing();
+                    //    timer -= interval;
+                    //}
                 }
             }
 
@@ -66,8 +57,7 @@ public class CaptureController : MonoBehaviour
                 this_unit.Team = null;
                 current_team = null;
             }
-            
-                
+ 
         }
         _captured = IsCaptured();
     }
@@ -97,20 +87,38 @@ public class CaptureController : MonoBehaviour
             {
                 continue;
             }
-            this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(true);
-            if (current_team != unit.GetComponent<Unit>().Team && current_team != null)
+            
+            if (unit.GetComponent<PlanetGravity>().isLanded)
             {
-                if (unit.GetComponent<PlanetGravity>().isLanded)
+                if (current_team != unit.GetComponent<Unit>().Team && current_team != null)
                 {
-                    this_unit.ChangeHP(unit.GetComponent<Cat>().Damage * -1);
+                    this_unit.ChangeHP(unit.GetComponent<Cat>().Damage * -0.001f);
                 }
+                else
+                {
+                    this_unit.SetColor(unit.GetComponent<Unit>().Team.Color);
+                    this_unit.ChangeHP(0.001f);
+                }
+                this.gameObject.GetComponent<PlanetManager>().flag.SetActive(false);
+                this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(true);
             }
-            else
-            {
-                
-                this_unit.SetColor(unit.GetComponent<Unit>().Team.Color);
-                this_unit.ChangeHP(1);
-            }
+        }
+    }
+
+    public void ChangeTeam()
+    {
+        this_unit.ChangeTeam(Globals.PLANETS[this.gameObject][0].GetComponent<Unit>().Team);
+        current_team = this_unit.Team;
+        this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(false);
+        this.gameObject.GetComponent<PlanetManager>().flag.SetActive(true);
+        this.gameObject.GetComponent<PlanetManager>().flag.GetComponent<SpriteRenderer>().color = this_unit.Team.Color;
+        if (Globals.MYTEAM == this_unit.Team)
+        {
+            this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(true);
+        }
+        else
+        {
+            this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(false);
         }
     }
 }

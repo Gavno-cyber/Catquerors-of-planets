@@ -44,8 +44,11 @@ public class UnitSelection : MonoBehaviour
         }
     }
 
-    public void _ChangePlanetForUnit(GameObject planet, List<UnitManager> selected_units)
+    public void _ChangePlanetForUnit(GameObject _planet, List<UnitManager> _selected_units)
     {
+        List<UnitManager> selected_units = new List<UnitManager>(_selected_units);
+        GameObject planet = _planet;
+
         int count = selected_units.Count;
 
         for (int i = 0; i < count; i++)
@@ -64,8 +67,9 @@ public class UnitSelection : MonoBehaviour
         }
     }
 
-    public void DeselectUnits(List<UnitManager> selected_units)
+    public void DeselectUnits(List<UnitManager> _selected_units)
     {
+        List<UnitManager> selected_units = new List<UnitManager>(_selected_units);
         int count = selected_units.Count;
 
         for (int i = 0; i < count; i++)

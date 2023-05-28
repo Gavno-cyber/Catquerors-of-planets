@@ -22,8 +22,14 @@ public class CatsManager : UnitManager
         if (Globals.MYTEAM == team)
         {
             ActivateCircle();
-        }    
-        SelectUnits(clearSelection, Globals.SELECTED_UNITS[team]);
+        }
+        if (team != null)
+        {
+            if (Globals.SELECTED_UNITS.ContainsKey(team))
+            {
+                SelectUnits(clearSelection, Globals.SELECTED_UNITS[team]);
+            }
+        }
     }
 
     private void SelectUnits(bool clearSelection, List<UnitManager> selected_units)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AIController : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class AIController : MonoBehaviour
         team = start_planet.GetComponent<Unit>().Team;
         SortValue();
     }
+
     float timer;
     public float interval = 2;
 
@@ -46,7 +48,7 @@ public class AIController : MonoBehaviour
             {
                 for (int i = 0; i < planets_with_units.Count; i++)
                 {
-                    if (CheckForUnits(planets_with_units[i]) && planets_with_units[i].GetComponent<Unit>().Team == team)
+                    if (planets_with_units[i].GetComponent<PlanetManager>().Count > 0 && planets_with_units[i].GetComponent<Unit>().Team == team)
                     {
                         unitSelection._SelectUnitsForPlanet(planets_with_units[i]);
                         FindPlanet(planets_with_units[i]);
@@ -73,35 +75,46 @@ public class AIController : MonoBehaviour
 
     private void FindPlanet(GameObject _start_planet)
     {
+        GameObject planet_to_change = null;
+        int max_priority = 0;
+
         for (int i = 0; i < planets.Count; i++)
         {
             if (planets[i] != _start_planet && unitSelection.CheckDistance(planets[i]))
             {
-                unitSelection._ChangePlanetForUnit(planets[i], Globals.SELECTED_UNITS[team]);
-                planets_with_units.Add(planets[i]);
-                return;
+                if (planets_priority[planets[i]] > max_priority)
+                {
+                    max_priority = planets_priority[planets[i]];
+                    planet_to_change = planets[i];
+                }
             }
+        }
+        if (planet_to_change != null)
+        {
+            unitSelection._ChangePlanetForUnit(planet_to_change, Globals.SELECTED_UNITS[team]);
+            planets_with_units.Add(planet_to_change);
         }
     }
 
     void SortValue()
     {
-        int max_priority = planets.Count;
+        int max_priority = planets.Count - 1;
 
         for (int i = 0; i < max_priority; i++)
         {
             int count = 1;
+
             for (int j = 0; j < max_priority; j++)
             {
-                if (i != j && planets[i].GetComponent<Planet>().MaxSpawn > planets[j].GetComponent<Planet>().MaxSpawn)
-                {
-                    count++;
-                }
+                //if (i != j && planets[i].GetComponent<Planet>().MaxSpawn > planets[j].GetComponent<Planet>().MaxSpawn)
+                //{
+                //    count++;
+                //}
                 if (i != j && planets[i].GetComponent<Planet>().HP < planets[j].GetComponent<Planet>().HP)
                 {
                     count++;
                 }
-                if (i != j && planets[i].GetComponent<Planet>().GetClass() == "Defend" || planets[i].GetComponent<Planet>().GetClass() == "Attack")
+                if (i != j && planets[j].GetComponent<Planet>().GetClass() == "Defend" || planets[j].GetComponent<Planet>().GetClass() == "Attack")
                 {
                     count++;
                 }

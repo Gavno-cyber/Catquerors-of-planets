@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class FillBar : MonoBehaviour
 {
-    public float fillAmount;
-    public float maxAmount;
+    float fillAmount;
+    float maxAmount = 6.22f;
     public GameObject FillCircle;
 
     float amountToFill = 0;
