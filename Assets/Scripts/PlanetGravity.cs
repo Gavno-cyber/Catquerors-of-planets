@@ -16,11 +16,19 @@ public class PlanetGravity : MonoBehaviour
     private bool _landed = false;
     private bool _on_planet = false;
 
+    private float radius;
+
+    public void SetRadius()
+    {
+        radius = planet.GetComponent<PlanetManager>().selectionCircle.GetComponent<DrawScript>().radius;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         //velocity = this.gameObject.GetComponent<VelocityComponent>().Velocity;
         rb = GetComponent<Rigidbody2D>();
+        SetRadius();
     }
 
     // Update is called once per frame
@@ -28,18 +36,18 @@ public class PlanetGravity : MonoBehaviour
     {
         dist = Vector3.Distance(gameObject.transform.position, planet.transform.position);
 
-        if (dist - planet.GetComponent<PlanetManager>().selectionCircle.GetComponent<DrawScript>().radius < 1f)
+        if (dist - radius < 1f)
         {
             _on_planet = true;
         }
         else
         {
+            _landed = false;
             _on_planet = false;
         }
 
         if (!_landed)
         {
-
             velocity = planet.transform.position - transform.position;
 
             rb.AddForce(velocity.normalized * (1.0f - dist / gravityDistance) * gravityForce);

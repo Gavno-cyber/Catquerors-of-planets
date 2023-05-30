@@ -40,8 +40,11 @@ public class CatsManager : UnitManager
         }
         if (clearSelection)
         {
-            foreach (UnitManager um in selected_units)
-                um.Deselect();
+            for (int i = 0; i < selected_units.Count; i++)
+            {
+                UnitManager selected_unit = selected_units[i];
+                selected_unit.Deselect();
+            }
         }
 
         selected_units.Add(this);

@@ -57,10 +57,11 @@ public class UnitSelection : MonoBehaviour
 
             selected_unit.Deselect();
 
-            if (planet.GetComponent<PlanetManager>().Count >= planet.GetComponent<Planet>().MaxSpawn)
+            if (planet.GetComponent<PlanetManager>().Count >= planet.GetComponent<Planet>().MaxCount)
                 continue;
 
             selected_unit.gameObject.GetComponent<PlanetGravity>().planet = planet;
+            selected_unit.gameObject.GetComponent<PlanetGravity>().SetRadius();
 
             old_planet.GetComponent<PlanetManager>().RemoveUnit(selected_unit.gameObject);
             planet.GetComponent<PlanetManager>().AddUnit(selected_unit.gameObject);

@@ -107,11 +107,15 @@ public class CaptureController : MonoBehaviour
 
     public void ChangeTeam()
     {
-        this_unit.ChangeTeam(Globals.PLANETS[this.gameObject][0].GetComponent<Unit>().Team);
+        this_unit.ChangeTeam(Globals.PLANETS[this.gameObject][Globals.PLANETS[this.gameObject].Count - 1].GetComponent<Unit>().Team);
         current_team = this_unit.Team;
+        
         this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(false);
+        
         this.gameObject.GetComponent<PlanetManager>().flag.SetActive(true);
+        
         this.gameObject.GetComponent<PlanetManager>().flag.GetComponent<SpriteRenderer>().color = this_unit.Team.Color;
+
         if (Globals.MYTEAM == this_unit.Team)
         {
             this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(true);

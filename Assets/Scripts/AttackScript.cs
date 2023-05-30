@@ -167,11 +167,12 @@ public class AttackScript : MonoBehaviour
         if (unit.GetComponent<Unit>().HP <= 0)
         {
             unit_to_damage = null;
-            planet_manager.RemoveUnit(unit);
             unit.GetComponent<UnitManager>().Deselect();
-            Destroy(unit);
+            planet_gravity.planet.GetComponent<PlanetManager>().RemoveUnit(unit);
             is_busy = false;
+            Destroy(unit);
         }
+
         else
             unit.GetComponent<Unit>().ChangeHP(this_stats.Damage * -0.1f);
     }

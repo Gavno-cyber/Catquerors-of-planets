@@ -27,7 +27,7 @@ public class SpawnController : MonoBehaviour
         this_stats = this.GetComponent<Unit>();
         max_count = this.gameObject.GetComponent<Planet>().MaxSpawn;
         circleCollider = GetComponent<CircleCollider2D>();
-        _spawnPosition = transform.position + new Vector3(circleCollider.radius, 0, 0);
+        
     }
 
     float timer;
@@ -50,7 +50,8 @@ public class SpawnController : MonoBehaviour
     void _SpawnUnit()
     {
         objectToSpawn.GetComponent<PlanetGravity>().planet = this.gameObject;
-        _objectToSpawn = Instantiate(objectToSpawn, _spawnPosition, Quaternion.identity);
+        int point = Random.Range(0, 359);
+        _objectToSpawn = Instantiate(objectToSpawn, _spawnPosition = transform.position + (new Vector3(Mathf.Cos(point), Mathf.Sin(point), 0) * circleCollider.radius), Quaternion.identity);
         _objectToSpawn.GetComponent<Unit>().ChangeTeam(this.gameObject.GetComponent<Unit>().Team);
         this.gameObject.GetComponent<PlanetManager>().AddUnit(_objectToSpawn);
         _objectToSpawn.GetComponent<UnitManager>().DisactivateCircle();

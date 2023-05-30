@@ -129,7 +129,9 @@ public class PlanetManager : UnitManager
         for (int i = 0; i < count - 1; i++)
         {
             GameObject unit = Globals.PLANETS[this.gameObject][i];
+
             GameObject next_unit = Globals.PLANETS[this.gameObject][i + 1];
+
             if (unit != null && next_unit != null)
             {
                 if (unit.GetComponent<Unit>().Team != next_unit.GetComponent<Unit>().Team)

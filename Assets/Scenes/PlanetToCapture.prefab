@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416000040922750437, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
+      propertyPath: maxAmount
+      value: 12.44
+      objectReference: {fileID: 0}
     - target: {fileID: 2348341385429291523, guid: 13d6a1316184fe347a6945aa0517d7c9, type: 3}
       propertyPath: m_IsActive
       value: 0
