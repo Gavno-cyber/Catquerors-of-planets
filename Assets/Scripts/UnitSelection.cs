@@ -26,7 +26,6 @@ public class UnitSelection : MonoBehaviour
             {
                 unit.GetComponent<UnitManager>().Select();
             }
-            
         }
     }
 

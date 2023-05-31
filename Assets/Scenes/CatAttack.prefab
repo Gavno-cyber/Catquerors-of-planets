@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4656638963755614183}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.29, y: -0.99, z: 0}
+  m_LocalPosition: {x: 3.35, y: -0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e34cecc19b1b5a4469a1c265f874b2fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &764892675409318552
 PrefabInstance:
@@ -167,6 +167,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2307844161890876927, guid: af25840f56d9caa409fd0554fcf51b40, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899232925040795190, guid: af25840f56d9caa409fd0554fcf51b40, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7235293200442950984, guid: af25840f56d9caa409fd0554fcf51b40, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -174,6 +182,14 @@ PrefabInstance:
     - target: {fileID: 7770591159669074493, guid: af25840f56d9caa409fd0554fcf51b40, type: 3}
       propertyPath: planet
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604406580840175832, guid: af25840f56d9caa409fd0554fcf51b40, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604406580840175832, guid: af25840f56d9caa409fd0554fcf51b40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af25840f56d9caa409fd0554fcf51b40, type: 3}

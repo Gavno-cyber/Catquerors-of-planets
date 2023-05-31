@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +20,19 @@ public class CaptureController : MonoBehaviour
     void Start()
     {
         planet_manager = this.gameObject.GetComponent<PlanetManager>();
+
         this_unit = this.gameObject.GetComponent<Unit>();
+
         units_of_planet = Globals.PLANETS[this.gameObject];
-        current_team = this_unit.Team;
+
+        if (this_unit.HP == 0)
+        {
+            this_unit.Team = null;
+        }
+        else
+        {
+            current_team = this_unit.Team;
+        }
     }
 
     void Update()
@@ -31,7 +41,8 @@ public class CaptureController : MonoBehaviour
 
         if (count > 0)
         {
-            if (!this.gameObject.GetComponent<PlanetManager>().IsAnotherTeam)
+
+            if (!_IsAnotherTeam())
             {
                 if (_captured && this_unit.Team == null)
                 {
@@ -39,9 +50,12 @@ public class CaptureController : MonoBehaviour
                 }
                 else
                 {
-                    if (Globals.PLANETS[this.gameObject][Globals.PLANETS[this.gameObject].Count - 1].GetComponent<Unit>().Team != this_unit.Team)
+                    if (Globals.PLANETS[this.gameObject][0])
                     {
-                        UpdateCapturing();
+                        if (Globals.PLANETS[this.gameObject][0].GetComponent<Unit>().Team != this_unit.Team)
+                        {
+                            UpdateCapturing();
+                        }
                     }
                     //timer += Time.deltaTime;
                     //if (timer >= interval)
@@ -51,13 +65,6 @@ public class CaptureController : MonoBehaviour
                     //}
                 }
             }
-
-            if (this_unit.HP == 0)
-            {
-                this_unit.Team = null;
-                current_team = null;
-            }
- 
         }
         _captured = IsCaptured();
     }
@@ -75,10 +82,32 @@ public class CaptureController : MonoBehaviour
     }
 
     GameObject unit;
-    GameObject start_unit;
 
     public void UpdateCapturing()
     {
+        bool damage = false;
+
+        unit = Globals.PLANETS[this.gameObject][0];
+
+        if (this_unit.HP == 0)
+        {
+            this_unit.SetColor(unit.GetComponent<Unit>().Team.Color);
+            this_unit.ChangeHP(0.001f);
+            current_team = unit.GetComponent<Unit>().Team;
+        }
+
+        if (current_team != unit.GetComponent<Unit>().Team)
+        {
+            damage = true;
+        }
+        else
+        {
+            damage = false;
+        }
+
+        this.gameObject.GetComponent<PlanetManager>().flag.SetActive(false);
+        this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(true);
+
         for (int i = 0; i < count; i++)
         {
             unit = units_of_planet[i];
@@ -87,20 +116,17 @@ public class CaptureController : MonoBehaviour
             {
                 continue;
             }
-            
+
             if (unit.GetComponent<PlanetGravity>().isLanded)
             {
-                if (current_team != unit.GetComponent<Unit>().Team && current_team != null)
+                if (damage)
                 {
                     this_unit.ChangeHP(unit.GetComponent<Cat>().Damage * -0.001f);
                 }
                 else
                 {
-                    this_unit.SetColor(unit.GetComponent<Unit>().Team.Color);
                     this_unit.ChangeHP(0.001f);
                 }
-                this.gameObject.GetComponent<PlanetManager>().flag.SetActive(false);
-                this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(true);
             }
         }
     }
@@ -109,11 +135,11 @@ public class CaptureController : MonoBehaviour
     {
         this_unit.ChangeTeam(Globals.PLANETS[this.gameObject][Globals.PLANETS[this.gameObject].Count - 1].GetComponent<Unit>().Team);
         current_team = this_unit.Team;
-        
+
         this.gameObject.GetComponent<FillBar>().FillCircle.SetActive(false);
-        
+
         this.gameObject.GetComponent<PlanetManager>().flag.SetActive(true);
-        
+
         this.gameObject.GetComponent<PlanetManager>().flag.GetComponent<SpriteRenderer>().color = this_unit.Team.Color;
 
         if (Globals.MYTEAM == this_unit.Team)
@@ -124,5 +150,26 @@ public class CaptureController : MonoBehaviour
         {
             this.gameObject.GetComponent<PlanetManager>().maskCircle.SetActive(false);
         }
+    }
+
+    bool _IsAnotherTeam()
+    {
+        if (Globals.PLANETS.ContainsKey(this.gameObject) && Globals.PLANETS[this.gameObject] != null && Globals.PLANETS[this.gameObject].Count >= 2)
+        {
+            for (int i = 0; i < Globals.PLANETS[this.gameObject].Count - 1; i++)
+            {
+                GameObject unit = Globals.PLANETS[this.gameObject][i];
+                GameObject next_unit = Globals.PLANETS[this.gameObject][i + 1];
+
+                if (unit != null && next_unit != null && unit.scene == this.gameObject.scene && unit.GetComponent<Unit>() != null && next_unit.GetComponent<Unit>() != null)
+                {
+                    if (unit.GetComponent<Unit>().Team != next_unit.GetComponent<Unit>().Team)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

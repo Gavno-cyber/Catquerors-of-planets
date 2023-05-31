@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Globals.PLAYERS.Add(new PlayerData(new Color(0.3f, 0.4f, 0.6f, 1f), "Player"));
-        Globals.PLAYERS.Add(new PlayerData(new Color(0.6f, 0.3f, 0.4f, 1f), "Enemy"));
+        Globals.PLAYERS.Add(new PlayerData(new Color(0.95686274509f, 0.09803921568f, 0.42745098039f, 1f), "Player"));
+        Globals.PLAYERS.Add(new PlayerData(new Color(0.95686274509f, 0.93333333333f, 0.54901960784f, 1f), "Enemy"));
 
         Globals.MYTEAM = Globals.PLAYERS[0];
 
